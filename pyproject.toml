@@ -1,0 +1,32 @@
+[project]
+name = "mining-daily-agent"
+version = "0.1.0"
+description = "矿权日报 Agent - Mining Daily Report Agent with MCP + LangGraph"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.0",
+    "langgraph>=0.2",
+    "langchain-mcp-adapters>=0.1",
+    "langchain-openai>=0.3",
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "pdfplumber>=0.10",
+    "pymupdf>=1.24",
+    "yfinance>=0.2.36",
+    "python-dateutil>=2.8",
+    "python-dotenv>=1.0",
+    "streamlit>=1.30",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["servers", "agent"]

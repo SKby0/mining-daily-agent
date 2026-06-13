@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # ── 主 Agent 入口 (stdio 方式启动 3 个 MCP Server 子进程) ──
+  agent:
+    build: .
+    command: python -m agent.run
+    stdin_open: true
+    tty: true
+    environment:
+      - LLM_API_KEY=${LLM_API_KEY}
+      - LLM_BASE_URL=${LLM_BASE_URL:-https://mydamoxing.cn}
+      - LLM_MODEL=${LLM_MODEL:-glm-5.1}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./output:/app/output
+
+  # ── 以下仅用于独立测试单个 MCP Server ──
+  mining-news-mcp:
+    build: .
+    command: python servers/mining_news.py
+    stdin_open: true
+
+  mineral-pdf-mcp:
+    build: .
+    command: python servers/mineral_pdf.py
+    stdin_open: true
+
+  lme-price-mcp:
+    build: .
+    command: python servers/lme_price.py
+    stdin_open: true
